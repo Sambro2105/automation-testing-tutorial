@@ -2,27 +2,27 @@ from nose.tools import assert_equal
 from selenium.common.exceptions import NoSuchElementException
 from behave import given, when, then
 
-@given('I go to google.ru')
-def step_impl(context):
-    context.driver.get("https://google.ru")
+@given('I go to "{url}"')
+def step_impl(context, url):
+    context.search_page.navigate(url)
 
 @given('I see a searchbox')
 def step_impl(context):
     try:
-        context.driver.find_element_by_xpath('//*[@id="tsf"]/div[2]/div[1]/div[1]/div/div[2]/input')
+        context.search_page.find_searchbox()
     except NoSuchElementException:
         return False
     return True
 
-@when('I type "{search_term}"')
-def step_impl(context, search_term):
-    context.driver.find_element_by_name("q").send_keys(search_term)
+@when('I type "{request}"')
+def step_impl(context, request):
+    context.search_page.type_search_request(request)
 
 
 @when('I click Google Search')
 def step_impl(context):
-    context.driver.find_element_by_class_name('gNO89b').click()
+    context.search_page.click_search()
 
 @then('I see search results')
 def step_impl(context):
-    assert_equal(context.driver.title, 'Центральный банк РФ - Поиск в Google')
+    assert_equal(context.search_results_page.get_page_title(), 'Центральный банк РФ - Поиск в Google')

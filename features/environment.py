@@ -1,10 +1,11 @@
-from selenium import webdriver
+from features.browser import Browser
+from features.pages.google_search_page import SearchPage
+from features.pages.search_results_page import SearchResultsPage
 
 def before_all(context):
-    context.driver = webdriver.Chrome(executable_path='\chromedriver.exe')
-    context.driver.set_page_load_timeout(10)
-    context.driver.implicitly_wait(10)
-    context.driver.maximize_window()
+    context.browser = Browser()
+    context.search_page = SearchPage()
+    context.search_results_page = SearchResultsPage()
 
 def after_all(context):
-    context.driver.quit()
+    context.browser.close()

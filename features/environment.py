@@ -1,4 +1,5 @@
 import os
+import time
 from features.browser import Browser
 import shutil
 import smtplib
@@ -10,9 +11,9 @@ from email import encoders
 screenshots_path = os.getcwd() + '\screenshots'
 
 mail_content = 'Hello'
-from_addr = 'urugvai2105@gmail.com'
-password = 'fynfyfyfhbde'
-to_addr = 'urukhai1001@gmail.com'
+from_addr = 'urukhai1001@gmail.com'
+password = 'fvcnthlfV1001'
+to_addr = 'urugvai2105@gmail.com'
 file_path = os.getcwd() + '\screenshots.zip'
 
 def send_file_to_email():
@@ -49,7 +50,7 @@ def before_all(context):
 def after_all(context):
     context.browser.close()
     shutil.make_archive(os.getcwd() + '\screenshots', 'zip', screenshots_path)
-    # send_file_to_email()
+    send_file_to_email()
     if os.path.isdir(screenshots_path):
         shutil.rmtree(screenshots_path)
     if os.path.isfile(file_path):

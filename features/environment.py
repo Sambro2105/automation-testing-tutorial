@@ -1,11 +1,12 @@
+import os
+
 from features.browser import Browser
-from features.pages.google_search_page import SearchPage
-from features.pages.search_results_page import SearchResultsPage
+import shutil
 
 def before_all(context):
+    if os.path.isdir(os.getcwd() + 'screenshots'):
+        shutil.rmtree(os.getcwd() + '\screenshots')
     context.browser = Browser()
-    context.search_page = SearchPage()
-    context.search_results_page = SearchResultsPage()
 
 def after_all(context):
     context.browser.close()

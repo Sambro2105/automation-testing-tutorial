@@ -1,6 +1,8 @@
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.by import By
 from features.browser import Browser
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 class SearchPageLocator(object):
     # Search Page Locators
@@ -12,9 +14,14 @@ class SearchPageLocator(object):
 class SearchPage(Browser):
     # Search Page Actions
 
-    def find_searchbox(self):
+    def is_there_a_searchbox(self):
         try:
-            self.driver.find_element(SearchPageLocator.SEARCH_FIELD[0], SearchPageLocator.SEARCH_FIELD[1])
+            element_present = EC.visibility_of(self.driver.find_element(*SearchPageLocator.SEARCH_FIELD))
+            WebDriverWait(self.driver, 3).until(element_present)
+        except TimeoutException:
+            return False
+        try:
+            self.driver.find_element(*SearchPageLocator.SEARCH_FIELD)
         except NoSuchElementException:
             return False
         return True
@@ -23,7 +30,7 @@ class SearchPage(Browser):
         self.driver.get(address)
 
     def type_search_request(self, request):
-        self.driver.find_element(SearchPageLocator.SEARCH_FIELD[0], SearchPageLocator.SEARCH_FIELD[1]).send_keys(request)
+        self.driver.find_element(*SearchPageLocator.SEARCH_FIELD).send_keys(request)
 
     def click_search(self):
-        self.driver.find_element(SearchPageLocator.SUBMIT_BUTTON[0], SearchPageLocator.SUBMIT_BUTTON[1]).click()
+        self.driver.find_element(*SearchPageLocator.SUBMIT_BUTTON).click()

@@ -1,5 +1,5 @@
 from nose.tools import assert_true
-from behave import given, when, then
+from behave import *
 
 from features.pages.google_search_page import SearchPage
 

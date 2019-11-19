@@ -1,5 +1,4 @@
 import os
-
 from selenium.webdriver.common.by import By
 from features.browser import Browser
 from selenium.webdriver.support import expected_conditions as EC
@@ -26,21 +25,29 @@ class CbrPage(Browser):
         return str in self.get_page_title()
 
     def click_by_link_text(self, link_text):
-        self.driver.find_element_by_link_text(link_text).click()
+        self.get_element(By.LINK_TEXT, link_text).click()
 
-    def click_by_h2(self, str):
-        self.driver.find_element_by_xpath(f"//*[contains(text(), '{str}')]" ).click()
+    def click_by_partial_link_text(self, link_text):
+        self.get_element(By.PARTIAL_LINK_TEXT, link_text).click()
+
+    def click_by_text(self, str):
+        self.get_element(By.XPATH, f"//*[contains(text(), '{str}')]" ).click()
 
     def write_text_into_field(self, text):
-        self.driver.find_element_by_name(CbePageLocator.TEXT_FIELD_NAME).send_keys(text)
+        self.get_element(By.NAME, CbePageLocator.TEXT_FIELD_NAME).send_keys(text)
 
     def check_i_agree(self):
-        self.driver.find_element_by_id(CbePageLocator.I_AGREE_CHECKBOX_ID).click()
+        self.get_element(By.ID, CbePageLocator.I_AGREE_CHECKBOX_ID).click()
 
     def make_a_screenshot(self, path):
         os.makedirs('screenshots')
         self.driver.save_screenshot(path)
 
     def press_three_lines_menu(self):
-        self.driver.find_element_by_class_name(CbePageLocator.THREE_LINES_CLASS_NAME).click()
+        self.get_element(By.CLASS_NAME, CbePageLocator.THREE_LINES_CLASS_NAME).click()
 
+    def click_by_xpath(self, xpath):
+        self.get_element(By.XPATH, xpath).click()
+
+    def switch(self):
+        self.driver.switch_to_window(self.driver.window_handles[-1])

@@ -18,3 +18,16 @@ Feature: Find cbr.ru with Google, write a thank you note, find and compare warni
     And Enter "случайный текст" into the field
     And Check "Я согласен"
     Then I make a screenshot
+
+  Scenario: Find warning page
+    When I press three lines menu
+    And I open "О сайте" section
+    And I click on link "Предупреждение"
+    Then Title of the page is "Предупреждение | Банк России"
+
+  Scenario: Compare warnings in en and ru
+    Given I save warning text
+    When I click on "EN"
+    And I save new warning text
+    Then I compare new warning text with the old
+    And I save a screenshot

@@ -25,4 +25,6 @@ class SearchResultsPage(Browser):
 
     def click_on_search_result(self, search_result):
         self.get_element(By.PARTIAL_LINK_TEXT, search_result).click()
+
+    def switch(self):
         self.driver.switch_to_window(self.driver.window_handles[-1])

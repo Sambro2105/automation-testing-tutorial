@@ -4,6 +4,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from features.browser import Browser
 
+
 class SearchResultsPage(Browser):
     # Search Results Page Actions
 

@@ -4,6 +4,7 @@ from features.browser import Browser
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
+
 class SearchPageLocator(object):
     # Search Page Locators
 

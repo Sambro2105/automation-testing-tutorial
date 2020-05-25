@@ -2,9 +2,11 @@ from selenium.webdriver.common.by import By
 
 from features.browser import Browser
 
+
 class CbeWarningPageLocator(object):
     # Cbr warning Page Locators
     WARNING_TEXT_ID = 'content'
+
 
 class CbrWarningPage(Browser):
     # Cbr warning Page Actions
@@ -26,4 +28,3 @@ class CbrWarningPage(Browser):
 
     def save_screenshot(self, path):
         self.driver.save_screenshot(path)
-

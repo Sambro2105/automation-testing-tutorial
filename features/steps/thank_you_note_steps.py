@@ -3,6 +3,7 @@ from nose.tools import assert_true
 
 from features.pages.cbr_page import CbrPage
 
+
 @given('Page\'s title has "{str}"')
 def assert_cbr_page(context, str):
     context.cbr_page = CbrPage()

@@ -6,12 +6,15 @@ from features.pages.google_search_page import SearchPage
 
 @given('I go to "{url}"')
 def step_impl(context, url):
+    print(type(context))
     context.search_page = SearchPage()
     context.search_page.navigate(url)
+
 
 @given('I see a searchbox')
 def step_impl(context):
     assert_true(context.search_page.is_there_a_searchbox())
+
 
 @when('I type "{request}"')
 def step_impl(context, request):

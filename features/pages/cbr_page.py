@@ -4,12 +4,14 @@ from features.browser import Browser
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
+
 class CbePageLocator(object):
     # Cbr Page Locators
 
     TEXT_FIELD_NAME = 'MessageBody'
     I_AGREE_CHECKBOX_ID = '_agreementFlag'
     THREE_LINES_CLASS_NAME = 'burger'
+
 
 class CbrPage(Browser):
     # Cbr Page Actions
